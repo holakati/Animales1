@@ -37,4 +37,15 @@ print ( contenidoWeb [ 1 ])
 # Viendo que tiene la posición 2 la variable contenido2Web
 print (contenido2Web [2])
 
-# Unificando la información
+#pasando la info  de los animales a un marco de datos
+dfanimales <- as.data.frame(contenidoWeb)
+dfanimales
+
+#pasando la info de los votos de cada animal a un marco de datos
+dfvotos <- as.data.frame(contenido2Web)
+dfvotos
+
+#Unir los 2 data frame
+AnimalesyVotos <- as.data.frame (contenido2Web, contenidoWeb)
+
+
