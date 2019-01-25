@@ -1,7 +1,7 @@
 # Batidos Verdes-
 ExtracciÃ³n de informaciÃ³n proyecto
 
-Extraer de la página web los nombres de los títulos de cada , con el objetivo de saber que ingrediente se repite más.
+Extraer de la página web los nombres de los títulos de cada batido, con el objetivo de saber que ingrediente se repite más.
 
 https://simplegreensmoothies.com/category/recipes/green-smoothies/page/2
 
