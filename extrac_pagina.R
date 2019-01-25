@@ -64,4 +64,4 @@ PalabrasContadas%>%
   aes(x=unlistbatidos, y=Freq) +
   geom_bar(stat="identity")
 
-
+#Fin
