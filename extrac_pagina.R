@@ -10,9 +10,9 @@ library('ggplot2')
 #==================== usando simplegreensmoothies.com ====================#
 
 #Se busca el url de la página y  se asigna a la variable
-paginasimplegreen <- "http://simplegreensmoothies.com/category/recipes/green-smoothies/page/2"
+paginasimplegreen <- 'http://simplegreensmoothies.com/category/recipes/green-smoothies'
 
-#Leyendo el html de la página 2
+#Leyendo el html de la página 1
 webpagesimplegreen <- read_html(paginasimplegreen)
 
 # Extracción del texto contenido en la clase donde se encuentran los titulos
@@ -65,3 +65,7 @@ PalabrasContadas%>%
   geom_bar(stat="identity")
 
 #Fin
+
+
+
+
