@@ -1,8 +1,7 @@
-# Animales-
+# Batidos Verdes-
 ExtracciÃ³n de informaciÃ³n proyecto
 
-Extraer una lista de animales representativos de cada país y el número de votos que posee cada uno de estos en la página:
+Extraer de la página web los nombres de los títulos de cada , con el objetivo de saber que ingrediente se repite más.
 
-https://listas.20minutos.es/lista/animales-representativos-de-paises-157885/
+https://simplegreensmoothies.com/category/recipes/green-smoothies/page/2
 
-Que responden a la pregunta: ¿Que animal representativo de un pais te gusta mas? 

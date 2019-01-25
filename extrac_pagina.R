@@ -3,49 +3,65 @@
 # Utilizando la libreria rvest
 library(rvest)
 
-#Se busca el url de la página y  se asigna a la variable el url
-paginaAnimales <- 'https://listas.20minutos.es/lista/animales-representativos-de-paises-157885/'
-paginawebAnimales <- read_html ( paginaAnimales )
-paginawebAnimales
+### Para graficar los ingredientes se  instala 
+#install.packages('ggplot2')
+library('ggplot2')
 
-#Extracción del texto contenido de los animales y sus puntos 
-contenidoWeb  <- html_nodes (paginawebAnimales , 'h3')
-contenidoWeb
-contenido2Web <- html_nodes (paginawebAnimales, '.recibidos')
-contenido2Web
+#==================== usando simplegreensmoothies.com ====================#
 
-# viendo el contenido de la posición 3 de la variable contenidoWeb y contenido2Web
-print ( contenidoWeb [ 3 ])
-print (contenido2Web [3])
+#Se busca el url de la página y  se asigna a la variable
+paginasimplegreen <- "http://simplegreensmoothies.com/category/recipes/green-smoothies/page/2"
 
-# Limpiando el texto de los animales en contenidoWeb 
-contenidoWeb <- gsub("<h3>","",contenidoWeb)
-contenidoWeb <- gsub("</h3>","",contenidoWeb)
-print(contenidoWeb)
+#Leyendo el html de la página 2
+webpagesimplegreen <- read_html(paginasimplegreen)
 
-#Limpiando el texto de los puntos o votos de cada animal en contenido2web
-contenido2Web <- gsub("<strong>","",contenido2Web)
-contenido2Web <- gsub("</strong>","",contenido2Web)
-contenido2Web <- gsub("recibidos","", contenido2Web)
-contenido2Web <- gsub("<span class=\"\">","", contenido2Web)
-contenido2Web <- gsub("</span>","",contenido2Web)
-print(contenido2Web)
+# Extracción del texto contenido en la clase donde se encuentran los titulos
+contenidosimplegreen <- html_nodes(webpagesimplegreen,".grid-title a")
 
-# Viendo que tiene la posición 1 la variable contenidoWeb
-print ( contenidoWeb [ 1 ])
+# viendo el contenido de la variable contenidosimplegreen
+print(contenidosimplegreen)
 
-# Viendo que tiene la posición 2 la variable contenido2Web
-print (contenido2Web [2])
+#viendo el contenido de la posición 1 en la variable contenidosimplegreen
+print(contenidosimplegreen[1])
 
-#pasando la info  de los animales a un marco de datos
-dfanimales <- as.data.frame(contenidoWeb)
-dfanimales
+# Extrayendo el texto de contenidosimplegreen
+textosimplegreen <- html_text(contenidosimplegreen)
+print (textosimplegreen)
 
-#pasando la info de los votos de cada animal a un marco de datos
-dfvotos <- as.data.frame(contenido2Web)
-dfvotos
+# Tabla de los titulos de la página 2
+tabla_titulos <- table(textosimplegreen)
 
-#Unir los 2 data frame
-AnimalesyVotos <- as.data.frame (contenido2Web, contenidoWeb)
+# Transformando a data frame la tabla creada con los títulos
+titulobatidos <- as.data.frame(tabla_titulos)
+
+# Unificando los títulos
+todosLosTitulosbatidos <- ""
+for(i in 1 : length(textosimplegreen)){
+  todosLosTitulosbatidos <- paste(todosLosTitulosbatidos,"",textosimplegreen[[i]])
+}
+#Se muestran los títulos
+print(todosLosTitulosbatidos)
+
+# Se dividen las palabras para poder ordenarlas
+splitEspacioBatidos<-strsplit(todosLosTitulosbatidos," ") 
+
+# Se muestran todas las palabras vistas en los titulos de los batidos
+unlistbatidos<-unlist(splitEspacioBatidos)
+
+# Se ordenan las palabras por orden alfabético y se asigna la frecuencia de cada una
+tablapalabras<-table(unlistbatidos)
+
+# Se realiza la lista final con las palabras ordenadas en orden alfabético
+# y con la frecuencia de cada una
+PalabrasContadas<-as.data.frame(tablapalabras)
+
+#Se guarda la lista realizada anteriormente en formato csv
+write.csv(PalabrasContadas, file="PalabrasContadas.csv")
+
+#Se hace grafico de barra
+PalabrasContadas%>%
+  ggplot() +
+  aes(x=unlistbatidos, y=Freq) +
+  geom_bar(stat="identity")
 
 
